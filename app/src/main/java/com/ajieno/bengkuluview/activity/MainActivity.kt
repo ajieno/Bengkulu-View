@@ -1,5 +1,6 @@
 package com.ajieno.bengkuluview.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.ajieno.bengkuluview.R
 import com.ajieno.bengkuluview.model.Wisata
 import com.ajieno.bengkuluview.util.ListWisataAdapter
 import com.ajieno.bengkuluview.util.WisataData
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rvWisata: RecyclerView
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         list.addAll(WisataData.listData)
         showRecyclerList()
+
+        floatingActionButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, AboutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showRecyclerList() {

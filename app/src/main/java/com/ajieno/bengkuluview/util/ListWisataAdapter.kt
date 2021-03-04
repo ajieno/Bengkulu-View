@@ -1,14 +1,17 @@
 package com.ajieno.bengkuluview.util
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.ajieno.bengkuluview.R
+import com.ajieno.bengkuluview.activity.DetailActivity
 import com.ajieno.bengkuluview.model.Wisata
-import com.ajieno.bengkuluview.util.ListWisataAdapter.*
+import com.ajieno.bengkuluview.util.ListWisataAdapter.ListViewHolder
 import com.squareup.picasso.Picasso
 
 class ListWisataAdapter(private val listwisata: ArrayList<Wisata>) : RecyclerView.Adapter<ListViewHolder>(){
@@ -33,8 +36,19 @@ class ListWisataAdapter(private val listwisata: ArrayList<Wisata>) : RecyclerVie
         val wisata = listwisata [position]
 
         Picasso.get().load(wisata.photo).into(holder.imgPhoto)
-
         holder.txtTitle.text = wisata.name
         holder.txtDesc.text = wisata.detail
+
+        val wisataExtra = Wisata(
+                wisata.name,
+                wisata.detail,
+                wisata.photo
+        )
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("Extra", wisataExtra)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 }
